@@ -1,0 +1,22 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiExamAssignment"
+             x:Class="MauiExamAssignment.App">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="AntiqueWhite" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="Padding" Value="10,5" />
+            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
