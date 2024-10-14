@@ -129,8 +129,35 @@ namespace Resources.Tests.UnitTests
             Assert.Equal(2, existingProductList.Count);
         }
         [Fact]
-        public void UpdateProduct_ShouldReturnTrue_WhenProductIsUpdated()
+        public void DeleteProduct__ShouldReturnTrue_WhenProductIsDeleted()
         {
+            // Arrange
+            var productToDelete = new Product
+            {
+                ProductId = Guid.NewGuid().ToString(),
+                ProductName = "C280",
+                Price = "100",
+                ProductCategory = new Category { Name = "Skrivare" }
+            };
+
+            var existingProductList = new List<Product> { productToDelete };
+
+            _mockFileService.Setup(x => x.GetFromFile())
+                .Returns(new ResponseResult<string> { Success = true, Result = JsonConvert.SerializeObject(existingProductList) });
+
+            _mockFileService.Setup(x => x.SaveToFile(It.IsAny<string>()))
+                .Returns(new ResponseResult<string> { Success = true });
+
+            // Act
+            var result = _mockProductService.DeleteProduct(productToDelete.ProductId);
+
+            // Assert
+            _mockFileService.Verify(x => x.SaveToFile(It.IsAny<string>()), Times.Once);
+            Assert.True(result.Success);
+            Assert.Equal("\nProduct was deleted successfully!\n", result.Message);
+            existingProductList.Remove(productToDelete);
+            Assert.Empty(existingProductList); 
+
 
         }
     }
