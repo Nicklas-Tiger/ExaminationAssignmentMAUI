@@ -16,6 +16,15 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private Product _currentProduct;
 
+    //[ObservableProperty]
+    //private string invalidName;
+
+    //[ObservableProperty]
+    //private string invalidDescription;
+
+    //[ObservableProperty]
+    //private string invalidPrice;
+
     public MainViewModel(IProductService<Product, Product> productService)
     {
         _productService = productService;
@@ -28,6 +37,9 @@ public partial class MainViewModel : ObservableObject
     {
         try
         {
+            //InvalidName = string.IsNullOrWhiteSpace(product.ProductName) ? "You must enter a name" : "";
+            //InvalidDescription = string.IsNullOrWhiteSpace(product.ProductDescription) ? "You must enter a description" : "";
+            //InvalidPrice = string.IsNullOrWhiteSpace(product.Price) ? "You must enter a valid price" : "";
 
             if (!string.IsNullOrWhiteSpace(CurrentProduct.ProductName))
             {
@@ -50,17 +62,26 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     public void Edit(Product selectedProduct)
     {
-        if (selectedProduct != null) 
+        try
         {
-            CurrentProduct = new Product
+            if (selectedProduct != null)
             {
-                ProductId = selectedProduct.ProductId,
-                ProductName = selectedProduct.ProductName,
-                ProductCategory = selectedProduct.ProductCategory,
-                ProductDescription = selectedProduct.ProductDescription,
-                Price = selectedProduct.Price
-            };
+                CurrentProduct = new Product
+                {
+                    ProductId = selectedProduct.ProductId,
+                    ProductName = selectedProduct.ProductName,
+                    ProductCategory = selectedProduct.ProductCategory,
+                    ProductDescription = selectedProduct.ProductDescription,
+                    Price = selectedProduct.Price
+                };
+
+                Products.Remove(selectedProduct);
         }
+        }
+        catch (Exception)
+        {
+        }
+
     }
     [RelayCommand]
     public void Delete(Product productToDelete)
