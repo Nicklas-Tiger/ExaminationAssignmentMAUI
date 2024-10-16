@@ -23,7 +23,7 @@ public partial class MainViewModel : ObservableObject
     //private string invalidDescription;
 
     //[ObservableProperty]
-    //private string invalidPrice;
+    //private string invalidPrice; 
 
     public MainViewModel(IProductService<Product, Product> productService)
     {
