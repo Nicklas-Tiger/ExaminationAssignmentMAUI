@@ -1,6 +1,8 @@
-﻿namespace MauiExamResources.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class Product
+namespace MauiExamResources.Models;
+
+public class Product : ObservableObject
 {
 
     public string ProductId { get; set; } = Guid.NewGuid().ToString();

@@ -36,8 +36,7 @@ public class ProductService : IProductService<Product, Product>
             else
                 return new ResponseResult<Product> { Success = false, Message = "\nFailed to load products.\n" };
 
-            if (!_products.Any(x => x.ProductName == product.ProductName))
-
+            if (!_products.Any(x => x.ProductId == product.ProductId))
             {
                 _products.Add(product);
                 var json = JsonConvert.SerializeObject(_products);
@@ -98,18 +97,21 @@ public class ProductService : IProductService<Product, Product>
     {
         try
         {
-            var response = GetAllProducts();
+            var response = GetAllProducts();  
             if (response.Success)
             {
-                var existingProduct = response.Result!.FirstOrDefault(x => x.ProductId == id);
+                _products = response.Result!.ToList(); 
+
+                var existingProduct = _products.FirstOrDefault(x => x.ProductId == id);
                 if (existingProduct != null)
                 {
+
                     existingProduct.ProductName = updatedProduct.ProductName;
                     existingProduct.Price = updatedProduct.Price;
                     existingProduct.ProductCategory = updatedProduct.ProductCategory;
                     existingProduct.ProductDescription = updatedProduct.ProductDescription;
 
-                    var json = JsonConvert.SerializeObject(response.Result);
+                    var json = JsonConvert.SerializeObject(_products);
                     var result = _fileService.SaveToFile(json);
 
                     if (result.Success)

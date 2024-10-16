@@ -30,7 +30,7 @@ public partial class MainViewModel : ObservableObject
         _productService = productService;
         _products = new ObservableCollection<Product>(_productService.GetAllProducts().Result ?? new List<Product>());
         _currentProduct = new Product();
-    } 
+    }
 
     [RelayCommand]
     public void Save(Product product)
@@ -59,8 +59,9 @@ public partial class MainViewModel : ObservableObject
         }
     }
 
+
     [RelayCommand]
-    public void Edit(Product selectedProduct)
+    public void Update(Product selectedProduct)
     {
         try
         {
@@ -76,7 +77,7 @@ public partial class MainViewModel : ObservableObject
                 };
 
                 Products.Remove(selectedProduct);
-        }
+            }
         }
         catch (Exception)
         {

@@ -37,7 +37,7 @@
                                         <Label Text="{Binding Price, StringFormat='Price: {0} SEK'}" FontSize="14" TextColor="Green" />
                                     </VerticalStackLayout>
 
-                                    <Button Grid.Column="1" FontFamily="fas" Text="&#xf044;" Command="{Binding BindingContext.EditCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding .}" />
+                                    <Button Grid.Column="1" FontFamily="fas" Text="&#xf044;" Command="{Binding BindingContext.UpdateCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding .}" />
 
                                     <Button Grid.Column="2" FontFamily="fas" Text="&#xf1f8;" Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding .}" />
                                 </Grid>
