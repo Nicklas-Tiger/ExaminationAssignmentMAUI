@@ -23,11 +23,14 @@ public class ProductService : IProductService<Product, Product>
     public ResponseResult<Product> CreateProduct(Product product)
     {
 
-        if (string.IsNullOrEmpty(product.ProductId) || string.IsNullOrEmpty(product.ProductName) || string.IsNullOrEmpty(product.Price))
+        if (string.IsNullOrEmpty(product.ProductName) || string.IsNullOrEmpty(product.Price))
         {
             return new ResponseResult<Product> { Success = false, Message = "\nInvalid product information.\n" };
         }
-
+        if (!decimal.TryParse(product.Price, out var parsedPrice))
+        {
+            return new ResponseResult<Product> { Success = false, Message = "\nPrice must be a valid number.\n" };
+        }
         try
         {
             var response = GetAllProducts();
@@ -36,7 +39,7 @@ public class ProductService : IProductService<Product, Product>
             else
                 return new ResponseResult<Product> { Success = false, Message = "\nFailed to load products.\n" };
 
-            if (!_products.Any(x => x.ProductId == product.ProductId))
+            if (!_products.Any(x => x.ProductName == product.ProductName))
             {
                 _products.Add(product);
                 var json = JsonConvert.SerializeObject(_products);
@@ -97,6 +100,14 @@ public class ProductService : IProductService<Product, Product>
     {
         try
         {
+            if (string.IsNullOrEmpty(updatedProduct.ProductName) || string.IsNullOrEmpty(updatedProduct.Price))
+            {
+                return new ResponseResult<Product> { Success = false, Message = "\nInvalid product information.\n" };
+            }
+            if (!decimal.TryParse(updatedProduct.Price, out var parsedPrice))
+            {
+                return new ResponseResult<Product> { Success = false, Message = "\nPrice must be a valid number.\n" };
+            }
             var response = GetAllProducts();  
             if (response.Success)
             {
