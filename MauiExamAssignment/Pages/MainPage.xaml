@@ -6,45 +6,46 @@
              x:DataType="{x:Type viewmodels:MainViewModel}"
              x:Class="MauiExamAssignment.Pages.MainPage"
              Title="Product Library"
-             BackgroundColor="AliceBlue">
+             >
  
 
 
         <Grid RowDefinitions="auto, *" Margin="25">
-            <VerticalStackLayout Grid.Row="0" Margin="0,0,0,30">
-                <Label Text="Create a new product and add it to our immensely fabulous product library" FontSize="11" FontFamily="Raleway-regular" Margin="0,0,0,5"/>
+        <VerticalStackLayout Grid.Row="0" Margin="0,0,0,30">
+            
+            <Label Text="Enter Product Category:" TextColor="Peru"/>
+            <Entry Text="{Binding CurrentProduct.ProductCategory.Name}"/>
+            <Label Text="{Binding InvalidName}" TextColor="Red" Margin="0,0,0,10"/>
 
-                <Entry Text="{Binding CurrentProduct.ProductCategory.Name}" Placeholder="Enter Product Category" Margin="0,0,0,20"/>
-                <Label Text="{Binding InvalidName}" TextColor="Red"/>
+            <Label Text="Enter Product Name:" TextColor="Peru" />
+            <Entry Text="{Binding CurrentProduct.ProductName}"/>
+            <Label Text="{Binding InvalidName}" TextColor="Red"/>
+            <Label Text="{Binding DuplicateProduct}" TextColor="Red" Margin="0,0,0,5"/>
 
-                <Entry Text="{Binding CurrentProduct.ProductName}" Placeholder="Enter Product Name" Margin="0,0,0,0"/>
-                <Label Text="{Binding InvalidName}" TextColor="Red"/>
-                <Label Text="{Binding DuplicateProduct}" TextColor="Red"/>
-                
+            <Label Text="Enter Product Description (Not Mandatory):" TextColor="Peru"/>
+            <Entry Text="{Binding CurrentProduct.ProductDescription}"/>
+            <Label Text="{Binding InvalidDescription}" TextColor="Red" Margin="0,0,0,10"/>
 
-                <Entry Text="{Binding CurrentProduct.ProductDescription}" Placeholder="Enter Product Description (Not mandatory)" Margin="0,0,0,20"/>
-                <Label Text="{Binding InvalidDescription}" TextColor="Red"/>
-                
-                <Entry Text="{Binding CurrentProduct.Price}" Placeholder="Enter Price" Margin="0,0,0,20"/>
-                <Label Text="{Binding InvalidPrice}" TextColor="Red"/>
+            <Label Text="Enter Product Price:" TextColor="Peru"/>
+            <Entry Text="{Binding CurrentProduct.Price}" Margin="0,0,0,0"/>
+            <Label Text="{Binding InvalidPrice}" TextColor="Red" Margin="0,0,0,10"/>
 
+            <Button Text="SAVE" Command="{Binding SaveCommand}"/>
+            
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Products}" Margin="0,5,5,5">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="6" HorizontalItemSpacing="5" VerticalItemSpacing="10" />
+                </CollectionView.ItemsLayout>
 
-                <Button Text="Save" Command="{Binding SaveCommand}"/>
-
-                <CollectionView Grid.Row="1" ItemsSource="{Binding Products}" Margin="10,10,10,10">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="3" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
-                    </CollectionView.ItemsLayout>
-
-                    <CollectionView.ItemTemplate>
+                <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="{x:Type models:Product}">
-                            <Frame Padding="10" BorderColor="Gray" CornerRadius="5" Margin="0,0,0,10">
+                            <Frame Padding="10" BorderColor="Peru" CornerRadius="5" Margin="0,0,0,10">
                                 <Grid ColumnDefinitions="*, auto, auto" Padding="5">
 
                                     <VerticalStackLayout Grid.Column="0">
                                         <Label Text="{Binding ProductId}" FontSize="8" FontAttributes="Italic"/>
-                                        <Label Text="{Binding ProductName}" FontSize="16" FontAttributes="Bold" />
-                                        <Label Text="{Binding ProductCategory.Name}" FontSize="14" TextColor="Gray" />
+                                    <Label Text="{Binding ProductName}" FontSize="16" FontAttributes="Bold" TextColor="Peru" />
+                                        <Label Text="{Binding ProductCategory.Name}" FontSize="14" TextColor="Gray" FontAttributes="Bold" />
                                         <Label Text="{Binding ProductDescription}" FontSize="12" TextColor="Gray" FontAttributes="Italic"/>
                                         <Label Text="{Binding Price, StringFormat='Price: {0} SEK'}" FontSize="14" TextColor="Green" />
                                     </VerticalStackLayout>
