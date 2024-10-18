@@ -23,7 +23,7 @@ public class ProductService : IProductService<Product, Product>
     public ResponseResult<Product> CreateProduct(Product product)
     {
 
-        if (string.IsNullOrEmpty(product.ProductName) || string.IsNullOrEmpty(product.Price))
+        if (string.IsNullOrEmpty(product.ProductName) ||string.IsNullOrEmpty(product.Price) || product.ProductCategory == null || string.IsNullOrEmpty(product.ProductCategory.Name))
         {
             return new ResponseResult<Product> { Success = false, Message = "\nInvalid product information.\n" };
         }
