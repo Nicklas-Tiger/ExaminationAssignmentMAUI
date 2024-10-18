@@ -21,7 +21,7 @@ namespace Resources.Tests.UnitTests
         }
 
         #region Create
-        [Fact]
+        [Fact] 
         public void CreateProduct__ShouldReturnSuccess_WhenProductIsCreated()
         {
             // Arrange
