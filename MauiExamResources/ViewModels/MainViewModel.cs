@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using MauiExamResources.Interfaces;
 using MauiExamResources.Models;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace MauiExamResources.ViewModels;
 
@@ -35,44 +36,43 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private string duplicateProduct = null!;
 
-    // Konstruktor som initierar produktlistan genom att hämta alla produkter från tjänsten.
+
     public MainViewModel(IProductService<Product, Product> productService)
     {
         _productService = productService;
         _products = new ObservableCollection<Product>(_productService.GetAllProducts().Result ?? new List<Product>());
-        _currentProduct = new Product(); // Initierar en tom produkt för användarens interaktion.
+        _currentProduct = new Product(); 
     }
 
-    // Kommando för att spara en produkt (antingen ny eller uppdaterad).
+    
     [RelayCommand]
     public void Save()
     {
-        // Validering av produktnamn: ser till att fältet inte är tomt.
-        InvalidName = string.IsNullOrWhiteSpace(CurrentProduct.ProductName) ? "You must enter a name" : "";
 
-        // Validering av produktbeskrivning: ser till att fältet inte är tomt.
-        InvalidDescription = string.IsNullOrWhiteSpace(CurrentProduct.ProductDescription) ? "You must enter a description" : "";
+        InvalidName = string.IsNullOrWhiteSpace(CurrentProduct.ProductName) ? "You must enter a name!" : "";
 
-        // Validering av pris: kontrollerar om priset är tomt eller om det är ett ogiltigt tal.
+
+        InvalidDescription = string.IsNullOrWhiteSpace(CurrentProduct.ProductDescription) ? "You must enter a description!" : "";
+
         if (string.IsNullOrWhiteSpace(CurrentProduct.Price))
         {
-            InvalidPrice = "You must enter a valid price";
+            InvalidPrice = "You must enter a valid price!";
         }
         else if (!decimal.TryParse(CurrentProduct.Price, out _))
         {
-            InvalidPrice = "Price must be a number";
+            InvalidPrice = "Price must be a number!";
         }
         else
         {
-            InvalidPrice = ""; // Tömmer felmeddelandet om priset är giltigt.
+            InvalidPrice = ""; 
         }
-        // Kontrollera om en produkt med samma namn redan finns i listan
+       
         var duplicateProduct = Products.FirstOrDefault(p => p.ProductName.Equals(CurrentProduct.ProductName));
 
         if (duplicateProduct != null && duplicateProduct.ProductId != CurrentProduct.ProductId)
         {
-            DuplicateProduct = "Product with the same name already exists"; // Felmeddelande för dubblett
-            return; // Avbryt sparandet om produkten redan finns
+            DuplicateProduct = "Product with the same name already exists!"; 
+            return; 
         }
         else
         {
@@ -127,8 +127,7 @@ public partial class MainViewModel : ObservableObject
             }
             catch (Exception ex)
             {
-                // Hantera eventuella fel och skriv ut dem (i en riktig app kan du visa dessa för användaren).
-                Console.WriteLine($"Error: {ex.Message}");
+                Debug.WriteLine(ex.Message);
             }
         }
     }
@@ -152,9 +151,9 @@ public partial class MainViewModel : ObservableObject
                 };
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            // Felhantering kan läggas till om det behövs.
+            Debug.WriteLine(ex.Message);
         }
     }
 
@@ -175,9 +174,9 @@ public partial class MainViewModel : ObservableObject
                 }
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            // Felhantering kan läggas till om det behövs.
+            Debug.WriteLine(ex.Message);
         }
     }
 }

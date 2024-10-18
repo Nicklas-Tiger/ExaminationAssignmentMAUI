@@ -7,23 +7,23 @@
              x:Class="MauiExamAssignment.Pages.MainPage"
              Title="Product Library">
 
-    <ScrollView>
-        <Grid RowDefinitions="*, auto" Margin="15">
-            <VerticalStackLayout Grid.Row="0" Margin="0,0,0,20">
+
+        <Grid RowDefinitions="auto, *" Margin="25">
+            <VerticalStackLayout Grid.Row="0" Margin="0,0,0,30">
                 <Label Text="Create a new product and add it to our immensely fabulous product library" FontSize="11" FontFamily="Raleway-regular" Margin="0,0,0,5"/>
 
-                <Entry Text="{Binding CurrentProduct.ProductCategory.Name, Mode=TwoWay}" Placeholder="Enter Product Category" Margin="0,0,0,10"/>
+                <Entry Text="{Binding CurrentProduct.ProductCategory.Name}" Placeholder="Enter Product Category" Margin="0,0,0,20"/>
                 <Label Text="" TextColor="Red"/>
 
-                <Entry Text="{Binding CurrentProduct.ProductName, Mode=TwoWay}" Placeholder="Enter Product Name" Margin="0,0,0,10"/>
+                <Entry Text="{Binding CurrentProduct.ProductName}" Placeholder="Enter Product Name" Margin="0,0,0,0"/>
                 <Label Text="{Binding InvalidName}" TextColor="Red"/>
                 <Label Text="{Binding DuplicateProduct}" TextColor="Red"/>
                 
 
-                <Entry Text="{Binding CurrentProduct.ProductDescription, Mode=TwoWay}" Placeholder="Enter Product Description" Margin="0,0,0,10"/>
+                <Entry Text="{Binding CurrentProduct.ProductDescription}" Placeholder="Enter Product Description" Margin="0,0,0,10"/>
                 <Label Text="{Binding InvalidDescription}" TextColor="Red"/>
                 
-                <Entry Text="{Binding CurrentProduct.Price, Mode=TwoWay}" Placeholder="Enter Price" Margin="0,0,0,10"/>
+                <Entry Text="{Binding CurrentProduct.Price}" Placeholder="Enter Price" Margin="0,0,0,10"/>
                 <Label Text="{Binding InvalidPrice}" TextColor="Red"/>
 
 
@@ -58,7 +58,7 @@
 
             </VerticalStackLayout>
         </Grid>
-    </ScrollView>
+
 </ContentPage>
 
                 
