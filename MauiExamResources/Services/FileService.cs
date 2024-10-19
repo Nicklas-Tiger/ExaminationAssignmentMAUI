@@ -3,9 +3,15 @@ using MauiExamResources.Models;
 
 namespace MauiExamResources.Services;
 
-public class FileService(string filePath = @"C:\projects\products.json") : IFileService 
+public class FileService : IFileService 
 {
-    private readonly string _filePath = filePath;
+    private readonly string _filePath;
+
+    public FileService(string fileName = "products.json")
+    {
+        var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        _filePath = Path.Combine(folderPath, fileName);
+    }
 
     public ResponseResult<string> GetFromFile()
     {

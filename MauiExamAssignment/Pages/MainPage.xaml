@@ -5,8 +5,7 @@
              xmlns:models="clr-namespace:MauiExamResources.Models;assembly=MauiExamResources"
              x:DataType="{x:Type viewmodels:MainViewModel}"
              x:Class="MauiExamAssignment.Pages.MainPage"
-             Title="Product Library"
-             >
+             Title="Product Library">
  
 
 
@@ -15,7 +14,7 @@
             
             <Label Text="Enter Product Category:" TextColor="Peru"/>
             <Entry Text="{Binding CurrentProduct.ProductCategory.Name}"/>
-            <Label Text="{Binding InvalidName}" TextColor="Red" Margin="0,0,0,10"/>
+            <Label Text="{Binding InvalidCategory}" TextColor="Red" Margin="0,0,0,10"/>
 
             <Label Text="Enter Product Name:" TextColor="Peru" />
             <Entry Text="{Binding CurrentProduct.ProductName}"/>
@@ -34,7 +33,7 @@
             
             <CollectionView Grid.Row="1" ItemsSource="{Binding Products}" Margin="0,5,5,5">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="6" HorizontalItemSpacing="5" VerticalItemSpacing="10" />
+                    <GridItemsLayout Span="4" HorizontalItemSpacing="5" VerticalItemSpacing="10" />
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
@@ -43,8 +42,8 @@
                                 <Grid ColumnDefinitions="*, auto, auto" Padding="5">
 
                                     <VerticalStackLayout Grid.Column="0">
-                                        <Label Text="{Binding ProductId}" FontSize="8" FontAttributes="Italic"/>
-                                    <Label Text="{Binding ProductName}" FontSize="16" FontAttributes="Bold" TextColor="Peru" />
+                                        <Label Text="{Binding ProductId}" FontSize="8" FontAttributes="Italic" />
+                                        <Label Text="{Binding ProductName}" FontSize="16" FontAttributes="Bold" TextColor="Peru" />
                                         <Label Text="{Binding ProductCategory.Name}" FontSize="14" TextColor="Gray" FontAttributes="Bold" />
                                         <Label Text="{Binding ProductDescription}" FontSize="12" TextColor="Gray" FontAttributes="Italic"/>
                                         <Label Text="{Binding Price, StringFormat='Price: {0} SEK'}" FontSize="14" TextColor="Green" />

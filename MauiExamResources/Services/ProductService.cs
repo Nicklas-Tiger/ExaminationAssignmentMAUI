@@ -10,15 +10,13 @@ public class ProductService : IProductService<Product, Product>
     private readonly IFileService _fileService;
     private List<Product> _products;
 
-
-
     public ProductService(IFileService fileService)
     {
         _fileService = fileService;
         _products = new List<Product>();
     }
 
-
+    #region Create
     //CREATE
     public ResponseResult<Product> CreateProduct(Product product)
     {
@@ -59,7 +57,9 @@ public class ProductService : IProductService<Product, Product>
 
         }
     }
+    #endregion
 
+    #region Read
     //READ
     public ResponseResult<IEnumerable<Product>> GetAllProducts()
     {
@@ -94,7 +94,9 @@ public class ProductService : IProductService<Product, Product>
             return new ResponseResult<IEnumerable<Product>> { Success = false, Message = content.Message };
         }
     }
+    #endregion
 
+    #region Update
     //UPDATE
     public ResponseResult<Product> UpdateProduct(string id, Product updatedProduct)
     {
@@ -141,6 +143,9 @@ public class ProductService : IProductService<Product, Product>
             return new ResponseResult<Product> { Success = false, Message = $"\nSomething went wrong: {ex.Message}\n" };
         }
     }
+    #endregion
+
+    #region Delete
     //DELETE
     public ResponseResult<Product> DeleteProduct(string id)
     {
@@ -174,4 +179,5 @@ public class ProductService : IProductService<Product, Product>
         }
 
     }
+    #endregion
 }
