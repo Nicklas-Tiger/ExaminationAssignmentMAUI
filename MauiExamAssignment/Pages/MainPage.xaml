@@ -33,7 +33,7 @@
             
             <CollectionView Grid.Row="1" ItemsSource="{Binding Products}" Margin="0,5,5,5">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Span="4" HorizontalItemSpacing="5" VerticalItemSpacing="10" />
+                    <GridItemsLayout Orientation="Vertical" Span="4" HorizontalItemSpacing="5" VerticalItemSpacing="10" />
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
